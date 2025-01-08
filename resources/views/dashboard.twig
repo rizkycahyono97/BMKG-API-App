@@ -1,0 +1,185 @@
+{% extends "partials/template.twig" %}
+
+{% block content %}
+<div class="container">
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if weather %}
+        <h2>Informasi Cuaca</h2>
+        <p><strong>Kota:</strong> {{ city }}</p>
+        <p><strong>Suhu:</strong> {{ weather.data[0].cuaca[0][0].t }} °C</p>
+        <p><strong>Kelembapan Udara:</strong> {{ weather.data[0].cuaca[0][0].hu }}</p>
+        <p><strong>Cuaca:</strong> {{ weather.data[0].cuaca[0][0].weather_desc }}</p>
+        <p><strong>Kecepatan Angin:</strong> {{ weather.data[0].cuaca[0][0].ws }}</p>
+        <p><strong>Arah Mata Angin:</strong> {{ weather.data[0].cuaca[0][0].wd }}</p>
+        <p><strong>Awan:</strong> {{ weather.data[0].cuaca[0][0].tcc }}%</p>
+        <p><strong>Perkiraan Waktu:</strong> {{ weather.data[0].cuaca[0][0].datetime }} WIB</p>
+        <!-- Tambahkan data lainnya -->
+    {% else %}
+        <p>Data cuaca tidak tersedia.</p>
+    {% endif %}
+</div>
+
+{# <form action="/dashboard" method="GET">
+    <label for="city">Masukkan nama kota:</label>
+    <input type="text" id="city" name="city" required>
+    <button type="submit">Cari Cuaca</button>
+</form> #}
+
+
+<form action="/dashboard" method="GET">
+    <label for="city">Pilih kota:</label>
+    <select id="city" name="city" required>
+        <optgroup label="Jakarta">
+            <option value="kepulauan seribu">Kepulauan Seribu</option>
+            <option value="jakarta pusat">Jakarta Pusat</option>
+            <option value="jakarta utara">Jakarta Utara</option>
+            <option value="jakarta barat">Jakarta Barat</option>
+            <option value="jakarta selatan">Jakarta Selatan</option>
+            <option value="jakarta timur">Jakarta Timur</option>
+        </optgroup>
+        <optgroup label="Banten">
+            <option value="kabupaten pandeglang">Kabupaten Pandeglang</option>
+            <option value="kabupaten lebak">Kabupaten Lebak</option>
+            <option value="kabupaten tangerang">Kabupaten Tangerang</option>
+            <option value="kabupaten serang">Kabupaten Serang</option>
+            <option value="kota tangerang">Kota Tangerang</option>
+            <option value="kota cilegon">Kota Cilegon</option>
+            <option value="kota serang">Kota Serang</option>
+            <option value="kota tangerang selatan">Kota Tangerang Selatan</option>
+        </optgroup>
+        <optgroup label="Jawa Barat">
+            <option value="kabupaten bogor">Kabupaten Bogor</option>
+            <option value="kabupaten sukabumi">Kabupaten Sukabumi</option>
+            <option value="kabupaten cianjur">Kabupaten Cianjur</option>
+            <option value="kabupaten bandung">Kabupaten Bandung</option>
+            <option value="kabupaten garut">Kabupaten Garut</option>
+            <option value="kabupaten tasikmalaya">Kabupaten Tasikmalaya</option>
+            <option value="kabupaten ciamis">Kabupaten Ciamis</option>
+            <option value="kabupaten kuningan">Kabupaten Kuningan</option>
+            <option value="kabupaten cirebon">Kabupaten Cirebon</option>
+            <option value="kabupaten majalengka">Kabupaten Majalengka</option>
+            <option value="kabupaten sumedang">Kabupaten Sumedang</option>
+            <option value="kabupaten indramayu">Kabupaten Indramayu</option>
+            <option value="kabupaten subang">Kabupaten Subang</option>
+            <option value="kabupaten purwakarta">Kabupaten Purwakarta</option>
+            <option value="kabupaten karawang">Kabupaten Karawang</option>
+            <option value="kabupaten bekasi">Kabupaten Bekasi</option>
+            <option value="kabupaten bandung barat">Kabupaten Bandung Barat</option>
+            <option value="kabupaten pangandaran">Kabupaten Pangandaran</option>
+            <option value="kota bogor">Kota Bogor</option>
+            <option value="kota sukabumi">Kota Sukabumi</option>
+            <option value="kota bandung">Kota Bandung</option>
+            <option value="kota cirebon">Kota Cirebon</option>
+            <option value="kota bekasi">Kota Bekasi</option>
+            <option value="kota depok">Kota Depok</option>
+            <option value="kota cimahi">Kota Cimahi</option>
+            <option value="kota tasikmalaya">Kota Tasikmalaya</option>
+            <option value="kota banjar">Kota Banjar</option>
+        </optgroup>
+        <optgroup label="Jawa Tengah">
+            <option value="kabupaten cilacap">Kabupaten Cilacap</option>
+            <option value="kabupaten banyumas">Kabupaten Banyumas</option>
+            <option value="kabupaten purbalingga">Kabupaten Purbalingga</option>
+            <option value="kabupaten banjarnegara">Kabupaten Banjarnegara</option>
+            <option value="kabupaten kebumen">Kabupaten Kebumen</option>
+            <option value="kabupaten purworejo">Kabupaten Purworejo</option>
+            <option value="kabupaten wonosobo">Kabupaten Wonosobo</option>
+            <option value="kabupaten magelang">Kabupaten Magelang</option>
+            <option value="kabupaten boyolali">Kabupaten Boyolali</option>
+            <option value="kabupaten klaten">Kabupaten Klaten</option>
+            <option value="kabupaten sukoharjo">Kabupaten Sukoharjo</option>
+            <option value="kabupaten wonogiri">Kabupaten Wonogiri</option>
+            <option value="kabupaten karanganyar">Kabupaten Karanganyar</option>
+            <option value="kabupaten sragen">Kabupaten Sragen</option>
+            <option value="kabupaten grobogan">Kabupaten Grobogan</option>
+            <option value="kabupaten blora">Kabupaten Blora</option>
+            <option value="kabupaten rembang">Kabupaten Rembang</option>
+            <option value="kabupaten pati">Kabupaten Pati</option>
+            <option value="kabupaten kudus">Kabupaten Kudus</option>
+            <option value="kabupaten jepara">Kabupaten Jepara</option>
+            <option value="kabupaten demak">Kabupaten Demak</option>
+            <option value="kabupaten semarang">Kabupaten Semarang</option>
+            <option value="kabupaten temanggung">Kabupaten Temanggung</option>
+            <option value="kabupaten kendal">Kabupaten Kendal</option>
+            <option value="kabupaten batang">Kabupaten Batang</option>
+            <option value="kabupaten pekalongan">Kabupaten Pekalongan</option>
+            <option value="kabupaten pemalang">Kabupaten Pemalang</option>
+            <option value="kabupaten tegal">Kabupaten Tegal</option>
+            <option value="kabupaten brebes">Kabupaten Brebes</option>
+            <option value="kota magelang">Kota Magelang</option>
+            <option value="kota surakarta">Kota Surakarta</option>
+            <option value="kota salatiga">Kota Salatiga</option>
+            <option value="kota semarang">Kota Semarang</option>
+            <option value="kota pekalongan">Kota Pekalongan</option>
+            <option value="kota tegal">Kota Tegal</option>
+        </optgroup>
+        <optgroup label="Yogyakarta">
+            <option value="kabupaten kulon progo">Kabupaten Kulon Progo</option>
+            <option value="kabupaten bantul">Kabupaten Bantul</option>
+            <option value="kabupaten gunungkidul">Kabupaten Gunungkidul</option>
+            <option value="kota yogyakarta">Kota Yogyakarta</option>
+        </optgroup>
+        <optgroup label="Jawa Timur">
+            <option value="kabupaten pacitan">Kabupaten Pacitan</option>
+            <option value="kabupaten ponorogo">Kabupaten Ponorogo</option>
+            <option value="kabupaten trenggalek">Kabupaten Trenggalek</option>
+            <option value="kabupaten tulungagung">Kabupaten Tulungagung</option>
+            <option value="kabupaten blitar">Kabupaten Blitar</option>
+            <option value="kabupaten kediri">Kabupaten Kediri</option>
+            <option value="kabupaten malang">Kabupaten Malang</option>
+            <option value="kabupaten lumajang">Kabupaten Lumajang</option>
+            <option value="kabupaten jember">Kabupaten Jember</option>
+            <option value="kabupaten banyuwangi">Kabupaten Banyuwangi</option>
+            <option value="kabupaten bondowoso">Kabupaten Bondowoso</option>
+            <option value="kabupaten situbondo">Kabupaten Situbondo</option>
+            <option value="kabupaten probolinggo">Kabupaten Probolinggo</option>
+            <option value="kabupaten pasuruan">Kabupaten Pasuruan</option>
+            <option value="kabupaten sidoarjo">Kabupaten Sidoarjo</option>
+            <option value="kabupaten mojokerto">Kabupaten Mojokerto</option>
+            <option value="kabupaten jombang">Kabupaten Jombang</option>
+            <option value="kabupaten nganjuk">Kabupaten Nganjuk</option>
+            <option value="kabupaten madiun">Kabupaten Madiun</option>
+            <option value="kabupaten magetan">Kabupaten Magetan</option>
+            <option value="kabupaten ngawi">Kabupaten Ngawi</option>
+            <option value="kabupaten bojonegoro">Kabupaten Bojonegoro</option>
+            <option value="kabupaten tuban">Kabupaten Tuban</option>
+            <option value="kabupaten lamongan">Kabupaten Lamongan</option>
+            <option value="kabupaten gresik">Kabupaten Gresik</option>
+            <option value="kabupaten bangkalan">Kabupaten Bangkalan</option>
+            <option value="kabupaten sampang">Kabupaten Sampang</option>
+            <option value="kabupaten pamekasan">Kabupaten Pamekasan</option>
+            <option value="kabupaten sumenep">Kabupaten Sumenep</option>
+            <option value="kota kediri">Kota Kediri</option>
+            <option value="kota blitar">Kota Blitar</option>
+            <option value="kota malang">Kota Malang</option>
+            <option value="kota probolinggo">Kota Probolinggo</option>
+            <option value="kota pasuruan">Kota Pasuruan</option>
+            <option value="kota mojokerto">Kota Mojokerto</option>
+            <option value="kota madiun">Kota Madiun</option>
+            <option value="kota surabaya">Kota Surabaya</option>
+            <option value="kota batu">Kota Batu</option>
+        </optgroup>
+    </select>
+    <form method="post" action="/proses-cuaca">
+        <label for="waktu">Pilih Waktu:</label>
+        <select name="waktu" id="waktu" required>
+            <option value="" disabled selected>Pilih waktu</option>
+            <option value="0-0">12:00 WIB (tgl 1)</option>
+            <option value="0-1">15:00 WIB (tgl 1)</option>
+            <option value="1-0">18:00 WIB (tgl 1)</option>
+            <option value="1-1">21:00 WIB (tgl 1)</option>
+            <option value="1-2">00:00 WIB (tgl 2)</option>
+            <option value="1-3">03:00 WIB (tgl 2)</option>
+            <option value="1-4">06:00 WIB (tgl 2)</option>
+            <option value="1-5">09:00 WIB (tgl 2)</option>
+        </select>    
+        <button type="submit">Simpan</button>
+    </form>    
+    <button type="submit">Cari Cuaca</button>
+</form>
+
+
+{% endblock %}

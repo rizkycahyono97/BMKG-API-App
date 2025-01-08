@@ -1,0 +1,23 @@
+{# {% extends "partials/template.twig" %} #}
+
+{# {% block content %} #}
+<h1>Select Location</h1>
+<form action="/search" method="get">
+    <select name="location" id="location" onchange="redirectTo(this.value)">
+        <option value="">-- Pilih Lokasi --</option>
+        <?php foreach ($locations as $location): ?>
+            <option value="<?= $location['api_id'] ?>">
+                <?= $location['name'] ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</form>
+
+<script>
+    function redirectTo(api_id) {
+        if (api_id) {
+            window.location.href = "/search/" + api_id;
+        }
+    }
+</script>
+{# {% endblock %} #}
